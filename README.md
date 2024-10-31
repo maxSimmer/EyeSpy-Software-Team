@@ -4,8 +4,8 @@ Repository for EyeSpy software team.
 ### Dependencies
  - Python
  - Flask
- - OpenCV (opencv-python-headless)
- - MongoDB (pymongo) 
+ - opencv
+ - pymongo 
 
  "pip install ___"
 
