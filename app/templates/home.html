@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Welcome to the User Login System</h1>
+    <div style="display: flex; gap: 20px;">
+        <div style="width: 720px; height: 360px; border: 1px solid black; padding: 10px;">
+            <!-- Image will appear here -->
+        </div>
+        <div style="width: 720px; height: 360px; border: 1px solid black; padding: 10px;">
+            <!-- Recognition status will appear here -->
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <form id="captureFacesForm" style="display: inline;">
+            <label for="name">Enter Name:</label>
+            <input type="text" id="name" name="name" required>
+            <button type="button" onclick="captureFaces()">Capture Faces</button>
+        </form>
+        <form id="trainRecognizerForm" style="display: inline;">
+            <button type="button" onclick="trainRecognizer()">Train Recognizer</button>
+        </form>
+        <form id="runWebcamForm" style="display: inline;">
+            <button type="button" onclick="runWebcam()">Run Webcam</button>
+        </form>
+    </div>
+
+    <script>
+        function captureFaces() {
+            const form = document.getElementById('captureFacesForm');
+            const formData = new FormData(form);
+            fetch('/capture_faces', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => alert(data.status))
+            .catch(error => console.error('Error:', error));
+        }
+
+        function trainRecognizer() {
+            fetch('/train_recognizer', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => alert(data.status))
+            .catch(error => console.error('Error:', error));
+        }
+
+        function runWebcam() {
+            fetch('/run_webcam', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => alert(data.status))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+{% endblock %}
